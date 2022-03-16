@@ -8,7 +8,7 @@ module.exports = {
         .setDescription('Replies with the total number of logs in the database'),
     async execute(interaction) {
 
-        // console.log(interaction.commandId); // [Interaction commandID]
+        console.log('numOfLogs id is ' + interaction.commandId); // [Interaction commandID]
 
         const logs = await messageLogSchema.find({}) // Returns all logs as objects in an array
 

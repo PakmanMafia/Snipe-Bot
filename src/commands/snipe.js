@@ -8,11 +8,9 @@ module.exports = {
         .setName('snipe')
         .setDescription('Snipes a recently deleted message!'),
     async execute(interaction) {
-
-        // console.log(interaction.commandId) // [Interaction commandId]
-
+        // console.log('snipe id is ' + interaction.commandId) [Interaction commandId]
         // Return the latest deleted message based on timestamp property
-        const results = await delSchema.find({}).sort({createdTimestamp: -1}).limit(1)
+        const results = await delSchema.find({}).sort({ createdTimestamp: -1 }).limit(1)
 
         // If Object 0 in results array is NOT undefined, then run the code
         if (typeof results[0] !== 'undefined') {
@@ -28,10 +26,14 @@ module.exports = {
 
             // avatarUrl declaration
             let avatarUrl;
-            async function avatarUrlFind () {
-                const guildMember = await guild.members.fetch(memberId);
-                // console.log("done!"); [Test, Deprecated]
-                avatarUrl = guildMember.displayAvatarURL({dynamic: true});
+            async function avatarUrlFind() {
+                try {
+                    const guildMember = await guild.members.fetch(memberId);
+                    avatarUrl = guildMember.displayAvatarURL({ dynamic: true });
+                    console.log(avatarUrl);
+                } catch {
+                    avatarUrl = `https://cdn.discordapp.com/embed/avatars/3.png`;
+                }
             }
             await avatarUrlFind();
 
@@ -39,11 +41,12 @@ module.exports = {
             const nessEmbed = new MessageEmbed()
                 .setAuthor({
                     name: results[0].author,
-                    iconURL: `${avatarUrl}`
+                    iconURL: avatarUrl
+
                 })
                 .setDescription(`${snipedMessage}`)
-                .setFooter({text: `${snipedMessageTimeTrim}`})
-            interaction.reply({embeds: [nessEmbed]})
+                .setFooter({ text: `${snipedMessageTimeTrim}` })
+            interaction.reply({ embeds: [nessEmbed] })
         } else {
             interaction.reply("There is nothing to snipe")
         }

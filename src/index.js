@@ -3,6 +3,7 @@ const fs = require('fs');
 const { Client, Intents, Collection } = require('discord.js');
 const { token } = require('./config.json');
 const logs = require('discord-logs');
+const path = require('path');
 
 // Client Creation
 const client = new Client({
@@ -22,8 +23,8 @@ logs(client, {
 client.commands = new Collection();
 
 // Command + Event Handling [Reading]
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync(path.resolve(`./src/commands`)).filter(file => file.endsWith('.js'));
+const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
 
 
 // Command + Event Handling Execution
@@ -51,7 +52,7 @@ client.on('interactionCreate', async interaction => {
         await command.execute(interaction);
     } catch (error) {
         console.error(error);
-        await interaction.reply({content: 'There was an error while executing this command!', ephemeral: true});
+        await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
     }
 });
 

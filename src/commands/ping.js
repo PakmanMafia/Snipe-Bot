@@ -9,6 +9,6 @@ module.exports = {
         // Don't judge me for this command, it's a very useful tester with low latency :P
         interaction.reply('Pong!');
 
-        // console.log(interaction.commandId); // [Interaction commandID]
+        console.log('ping id is ' + interaction.commandId); // [Interaction commandID]
     }
 }

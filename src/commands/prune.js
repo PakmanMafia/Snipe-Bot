@@ -7,7 +7,7 @@ module.exports = {
         .addIntegerOption(option => option.setName('amount').setDescription('Number of messages to prune')),
     defaultPermission: false,
     async execute(interaction) {
-        console.log(interaction.commandId) // [Interaction commandID]
+        console.log('prune command id is ' + interaction.commandId) // [Interaction commandID]
         const amount = interaction.options.getInteger('amount');
 
         if (amount <= 1 || amount > 100) {

@@ -10,9 +10,10 @@ module.exports = {
         .setDescription('Snipes a message up to 5 deletes back!')
         .addIntegerOption(option => option.setName('input').setDescription('How many message ago do you want to snipe?').setMinValue(1).setMaxValue(5).setRequired(true)),
     async execute(interaction) {
-        const array =  await delSchema.find({}).sort({createdTimestamp: -1}).limit(6)
+        console.log('snipenum id is ' + interaction.commandId)
+        const array = await delSchema.find({}).sort({ createdTimestamp: -1 }).limit(6)
         let input = interaction.options.getInteger('input');
-        let messagesAgo =  input - 1;
+        let messagesAgo = input - 1;
 
         // Important Vars
         const memberId = array[messagesAgo].authorId;
@@ -28,7 +29,7 @@ module.exports = {
         let avatarUrl;
         async function avatarUrlFind() {
             const guildMember = await guild.members.fetch(memberId);
-            avatarUrl = guildMember.displayAvatarURL({dynamic: true});
+            avatarUrl = guildMember.displayAvatarURL({ dynamic: true });
         }
         await avatarUrlFind();
         const snipeEmbed = new MessageEmbed()
@@ -37,8 +38,8 @@ module.exports = {
                 iconURL: `${avatarUrl}`
             })
             .setDescription(`${snipedMessage}`)
-            .setFooter({text: `${snipedMessageTimeTrim}`})
-        interaction.reply({embeds: [snipeEmbed]});
+            .setFooter({ text: `${snipedMessageTimeTrim}` })
+        interaction.reply({ embeds: [snipeEmbed] });
 
         // console.log(array[messagesAgo].content); [Test, Deprecated]
     }
