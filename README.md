@@ -11,6 +11,8 @@
 
 ## About
 
+A fork of Soucouyant's Snipe-Bot for discord. Works on improving the framework and issues presented within his version.
+    
 The snipe bot is a simple discord bot that retrieves deleted messages using:
 - [Node.js](https://nodejs.org) module which easily interacts with the [Discord API](https://discord.com/developers/docs/intro)
 - [Discord.JS](https://discord.js.org/#/) library which provides easy to use JS methods and functions to make coding the bot a lot easier and smoother.
