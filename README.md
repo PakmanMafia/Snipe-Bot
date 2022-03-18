@@ -13,6 +13,13 @@
 
 A fork of Soucouyant's Snipe-Bot for discord. Works on improving the framework and issues presented within his version. Also, improvements within the documentation to improve installation and use of the bot.
     
+## Issues, Fixes and Enchancements
+- Currently, all issues opened in the original repository are still present
+- **Refactoring.** Much of the code that was written was organized sloppily. They are now being organized in a much cleaner method <em>(Progress is still ongoing, much of the code is dependant on other variables, therefore issues will crop up due to fs.</em>
+- **Sniping Attachments** The current state of development is that the source for sniping images has been found, and it requires some modifying of pre-existing code.
+- **Fixed** Previously, if a message was returned as empty, the bot would have errors logging it, as the message.content is required both by mongoose and discord.js. The issue has been fixed (albeit a sloppy method)
+    
+ 
 The snipe bot is a simple discord bot that retrieves deleted messages using:
 - [Node.js](https://nodejs.org) module which easily interacts with the [Discord API](https://discord.com/developers/docs/intro)
 - [Discord.JS](https://discord.js.org/#/) library which provides easy to use JS methods and functions to make coding the bot a lot easier and smoother.
